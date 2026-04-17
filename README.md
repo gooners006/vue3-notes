@@ -1,83 +1,63 @@
 # Rwazi Note App
 
-Please design a user-friendly, single-page note-taking application using Vue 3 Composition API. The application should allow users to easily add and remove notes, and the notes should be displayed on the main page in a responsive format. Please [watch this video](https://rwazi-public.s3.amazonaws.com/interview/vue-notes-interview-project.webm) to get an idea of what it might look like.
+A single-page note-taking application built with Vue 3 Composition API.
 
-Photo: https://rwazi-public.s3.amazonaws.com/interview/rwazi-vue-notes-interview.png
+See [README.original.md](./README.original.md) for the original project requirements.
 
-The following requirements should be met:
+## Features
 
-* The layout of the application must be responsive to ensure optimal user experience.
-* Users should be able to seamlessly add notes to the application.
-* The application should allow users to effortlessly remove notes when necessary.
-* The user should be able to sort by date create the notes.
-* The user should be able to search for text in the notes.
-* If the number of notes is high, pagination should be implemented.
-* To add an element of visual interest, the background of the application should be randomly generated.
-* Finally, each note element should feature a date stamp at the bottom to help users keep track of when they made each note.
+- Add and remove notes
+- Search notes by text (case-insensitive)
+- Sort notes by date created (newest/oldest first)
+- Pagination (12 notes per page)
+- Random pastel background color per note
+- Date stamp on each note
+- Persistent storage via localStorage
+- Responsive layout (2/3/4 column grid)
 
-Please ensure that you use Vue 3 Composition API when building the application.
+## Tech Stack
 
-## Recommended IDE Setup
+- **Vue 3** with `<script setup lang="ts">` (Composition API)
+- **Pinia** for state management
+- **Tailwind CSS** for styling
+- **Vite** for bundling and dev server
+- **TypeScript** throughout
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Getting Started
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Commands
 
-```sh
-npm run build
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Type-check and build for production |
+| `npm run preview` | Preview production build |
+| `npm run test:unit` | Run unit tests (Vitest) |
+| `npm run test:e2e` | Run e2e tests (Cypress) against production build |
+| `npm run test:e2e:dev` | Run e2e tests against dev server (interactive) |
+| `npm run lint` | Lint with ESLint |
+| `npm run format` | Format with Prettier |
+
+## Project Structure
+
+```
+src/
+├── App.vue                        # Main app (search, sort, pagination)
+├── main.ts                        # App entry point
+├── assets/main.css                # Tailwind imports
+├── components/
+│   ├── NoteCard.vue               # Individual note display
+│   └── NoteInput.vue              # Note creation form
+└── stores/
+    └── notes.ts                   # Pinia store (CRUD + localStorage)
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Testing
 
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- **Unit tests**: `src/stores/__tests__/notes.spec.ts` — tests for add, remove, and color generation
+- **E2E tests**: `cypress/e2e/notes.cy.ts` — 10 tests covering all features end-to-end
